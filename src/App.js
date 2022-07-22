@@ -40,30 +40,11 @@ export default function App() {
             return newArray;
         })
 
-        // This code not 
-        // setNotes(oldNotes => oldNotes.map(oldNote => {
-        //     return oldNote.id === currentNoteId
-        //         ? { ...oldNote, body: text }
-        //         : oldNote
-        // }))
-
     }
 
     function deleteNote(event, noteId) {
         event.stopPropagation()
-        setNotes((oldNotes, index) => {
-            const newArray = [];
-            for (let i = 0; i < oldNotes.length; i++) {
-                const oldNote = oldNotes[i];
-                if (oldNote.id === noteId) {
-                    newArray.splice(index, index + 1)
-                } else {
-                    newArray.push(oldNote)
-                }
-            }
-            return newArray;
-        })
-
+        setNotes( oldNotes => oldNotes.filter(note => note.id !== noteId));
     }
 
     function findCurrentNote() {
