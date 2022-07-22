@@ -27,12 +27,12 @@ export default function App() {
 
     function updateNote(text) {
 
-        setNotes(oldNotes =>{
+        setNotes(oldNotes => {
             const newArray = [];
-            for(let i=0;i<oldNotes.length;i++) {
+            for (let i = 0; i < oldNotes.length; i++) {
                 const oldNote = oldNotes[i];
-                if(oldNote.id === currentNoteId){
-                    newArray.unshift({...oldNote , body : text})
+                if (oldNote.id === currentNoteId) {
+                    newArray.unshift({ ...oldNote, body: text })
                 } else {
                     newArray.push(oldNote)
                 }
@@ -46,6 +46,23 @@ export default function App() {
         //         ? { ...oldNote, body: text }
         //         : oldNote
         // }))
+
+    }
+
+    function deleteNote(event, noteId) {
+        event.stopPropagation()
+        setNotes((oldNotes, index) => {
+            const newArray = [];
+            for (let i = 0; i < oldNotes.length; i++) {
+                const oldNote = oldNotes[i];
+                if (oldNote.id === noteId) {
+                    newArray.splice(index, index + 1)
+                } else {
+                    newArray.push(oldNote)
+                }
+            }
+            return newArray;
+        })
 
     }
 
@@ -67,6 +84,7 @@ export default function App() {
                     >
                         <Sidebar
                             notes={notes}
+                            deleteNote={deleteNote}
                             currentNote={findCurrentNote()}
                             setCurrentNoteId={setCurrentNoteId}
                             newNote={createNewNote}
