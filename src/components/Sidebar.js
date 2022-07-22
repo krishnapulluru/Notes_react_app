@@ -1,7 +1,6 @@
 import React from "react"
 
 export default function Sidebar(props) {
-    localStorage.setItem("mynotes", JSON.stringify(props.notes));
     const noteElements = props.notes.map((note, index) => (
         <div key={note.id}>
             <div
